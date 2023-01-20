@@ -7,7 +7,7 @@ on:
 # 変数定義
 env:
   # pythonバージョンの指定
-  - python-version: ["3.10"]
+  python-version: "3.10"
 
 # jobの定義
 jobs:

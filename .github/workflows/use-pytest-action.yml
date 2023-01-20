@@ -22,12 +22,12 @@ jobs:
         # GitHubリポジトリのcheckout
         uses: actions/checkout@v3
       # stepの名前
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ env.python-version }}
         # pythonのセットアップ
         uses: actions/setup-python@v4
         # matrixで指定したバージョンを使用
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ env.python-version }}
       # stepの名前
       - name: Install dependencies
         # ツールのインストール

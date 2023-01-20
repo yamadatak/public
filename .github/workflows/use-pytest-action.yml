@@ -18,7 +18,7 @@ jobs:
     steps:
       # stepの名前
       - name: checkout repo
-      # GitHubリポジトリのcheckout
+        # GitHubリポジトリのcheckout
         uses: actions/checkout@v3
       # stepの名前
       - name: Set up Python ${{ matrix.python-version }}

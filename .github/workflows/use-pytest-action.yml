@@ -25,12 +25,12 @@ jobs:
       - name: Set up Python ${{ env.python-version }}
         # pythonのセットアップ
         uses: actions/setup-python@v4
-        # matrixで指定したバージョンを使用
+        # envで指定したバージョンを使用できるようにセットアップ
         with:
           python-version: ${{ env.python-version }}
       # stepの名前
       - name: Install dependencies
-        # ツールのインストール
+        # 使用ツールのインストール
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest

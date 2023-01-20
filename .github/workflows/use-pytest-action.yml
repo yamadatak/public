@@ -1,7 +1,9 @@
 name: Python package
 
-# 実行条件(今回はリポジトリへのpush)
-on: [push]
+# 実行条件(今回はリポジトリのmainブランチへのpush)
+on: 
+  push:
+    branches: main
 # jobの定義
 jobs:
   # jobの名前
@@ -17,7 +19,7 @@ jobs:
       # stepの名前
       - name: checkout repo
       # GitHubリポジトリのcheckout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       # stepの名前
       - name: Set up Python ${{ matrix.python-version }}
         # pythonのセットアップ

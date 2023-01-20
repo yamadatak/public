@@ -4,16 +4,17 @@ name: Python package
 on: 
   push:
     branches: main
+# 変数定義
+env:
+  # pythonバージョンの指定
+  - python-version: ["3.10"]
+
 # jobの定義
 jobs:
   # jobの名前
   python-code-check:
     # 実行する場所(今回はGitHub提供のubuntuサーバ)
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # pythonバージョンの指定
-        python-version: ["3.10"]
     # stepの定義
     steps:
       # stepの名前

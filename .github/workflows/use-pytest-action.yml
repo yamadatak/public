@@ -1,0 +1,53 @@
+name: Python package
+
+# 実行条件(今回はリポジトリへのpush)
+on: [push]
+# jobの定義
+jobs:
+  # jobの名前
+  python-code-check:
+    # 実行する場所(今回はGitHub提供のubuntuサーバ)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # pythonバージョンの指定
+        python-version: ["3.10"]
+    # stepの定義
+    steps:
+      # stepの名前
+      - name: checkout repo
+      # GitHubリポジトリのcheckout
+      - uses: actions/checkout@v3
+      # stepの名前
+      - name: Set up Python ${{ matrix.python-version }}
+        # pythonのセットアップ
+        uses: actions/setup-python@v4
+        # matrixで指定したバージョンを使用
+        with:
+          python-version: ${{ matrix.python-version }}
+      # stepの名前
+      - name: Install dependencies
+        # ツールのインストール
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      # stepの名前
+      - name: Lint with flake8
+        # flake8でコードの静的チェック
+        run: |
+          flake8 python/src/*py
+      # stepの名前
+      - name: Test with pytest
+        # pytestでテスト実行
+        run: |
+          pytest python/tests/ --cov=python/src/ --cov-report=html
+      # stepの名前
+      - name: upload artifact
+        # pytestのテスト結果をGitHubにアップロード
+        uses: actions/upload-artifact@v3
+        with:
+          # uploadする名前
+          name: pytest-coverage-report
+          # upload対象のファイル
+          path: ./htmlcov/index.html
